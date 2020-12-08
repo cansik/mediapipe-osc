@@ -1,5 +1,5 @@
 # MediaPipe OSC
-Exposing [mediapipe](https://google.github.io/mediapipe/) examples over OSC to be used in other applications.
+[MediaPipe](https://google.github.io/mediapipe/) examples which stream their detections over OSC to be used in other applications.
 
 ### Install & Run
 

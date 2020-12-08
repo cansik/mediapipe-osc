@@ -30,10 +30,10 @@ The landmark model currently included in MediaPipe Pose predicts the location of
 
 *[Reference: mediapipe/solutions/pose](https://google.github.io/mediapipe/solutions/pose#pose-landmark-model-blazepose-tracker)*
 
-The OSC message sent by the pose example contains 25 x 4 `float` values.
+The OSC message sent by the pose example contains 1 `int` and 25 x 4 `float` values. The first `int` value indicates how many psoes are sent (currently only `0` or `1`).
 
 ```
-/mediapipe/pose [x, y, z, visibility, x, y, z, visibility ...]
+/mediapipe/pose [count, x, y, z, visibility, x, y, z, visibility ...]
 ```
 
 ### Hand Detection

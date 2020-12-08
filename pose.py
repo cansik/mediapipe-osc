@@ -7,16 +7,18 @@ from mediapipe.framework.formats import landmark_pb2
 from pythonosc import udp_client
 from pythonosc.osc_message_builder import OscMessageBuilder
 
-OSC_ADDRESS = "/mediapipe/pose"
+POSE_ADDRESS = "/mediapipe/pose"
 
 
 def send_pose(client: udp_client,
               landmark_list: landmark_pb2.NormalizedLandmarkList):
     if landmark_list is None:
+        client.send_message(POSE_ADDRESS, 0)
         return
 
     # create message and send
-    builder = OscMessageBuilder(address=OSC_ADDRESS)
+    builder = OscMessageBuilder(address=POSE_ADDRESS)
+    builder.add_arg(1)
     for landmark in landmark_list.landmark:
         builder.add_arg(landmark.x)
         builder.add_arg(landmark.y)

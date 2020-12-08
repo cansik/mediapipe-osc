@@ -9,7 +9,7 @@ Currently only MacOS and Linux are supported. It's recommended to use Python3 an
 python install -r requirements.txt
 ```
 
-To run an example use the basic python command to start up the script. It is always possible to set the `--device` paramater, which indicates which VideoCapture device will be used (by default `0`).
+To run an example use the basic python command to start up the script.
 
 ```bash
 # start pose detection with webcam 0

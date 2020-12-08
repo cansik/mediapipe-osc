@@ -1,4 +1,4 @@
-# Media Pipe OSC
+# MediaPipe OSC
 Exposing [mediapipe](https://google.github.io/mediapipe/) examples over OSC to be used in other applications.
 
 ### Install & Run
@@ -18,11 +18,11 @@ python pose.py --device 0
 
 Other parameters are documented in the following list or algorithm specific.
 
-- device - Device id for the VideoCapture (default `0`)
-- min-detection-confidence - Minimum confidence value ([0.0, 1.0]) for the detection to be considered successful. (default `0.5`)
-- min-tracking-confidence - Minimum confidence value ([0.0, 1.0]) to be considered tracked successfully. (default `0.5`)
-- ip - OSC ip address to send to (default `127.0.0.1`)
-- port - OSC port to send to (default `7500`)
+- **device** - Device id for the VideoCapture (default `0`)
+- **min-detection-confidence** - Minimum confidence value ([0.0, 1.0]) for the detection to be considered successful. (default `0.5`)
+- **min-tracking-confidence** - Minimum confidence value ([0.0, 1.0]) to be considered tracked successfully. (default `0.5`)
+- **ip** - OSC ip address to send to (default `127.0.0.1`)
+- **port** - OSC port to send to (default `7500`)
 
 
 ### Pose Landmark Model (BlazePose Tracker)
@@ -65,4 +65,5 @@ The [hand detection model](https://google.github.io/mediapipe/solutions/hands.ht
 tbd
 
 ### About
-Example code and documentation adapted from [google/mediapipe](https://google.github.io/mediapipe/solutions/) 
+Example code and documentation adapted from [google/mediapipe](https://google.github.io/mediapipe/solutions/)
+OSC sending and examples implemented by [cansik](https://github.com/cansik)

@@ -69,5 +69,5 @@ tbd
 Currently there are very basic receiver examples for processing. Check out the [examples](examples) folder.
 
 ### About
-Example code and documentation adapted from [google/mediapipe](https://google.github.io/mediapipe/solutions/)
-OSC sending and examples implemented by [cansik](https://github.com/cansik)
+* Example code and documentation adapted from [google/mediapipe](https://google.github.io/mediapipe/solutions/)
+* OSC sending and examples implemented by [cansik](https://github.com/cansik)

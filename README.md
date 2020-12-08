@@ -3,7 +3,7 @@
 
 ### Install & Run
 
-Currently only MacOS and Linux are supported. It's recommended to use Python3 and a virtual environment.
+Currently this is only tested on Windows and MacOS. It's recommended to use Python3 and a virtual environment.
 
 ```bash
 python install -r requirements.txt

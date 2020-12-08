@@ -1,11 +1,12 @@
 import argparse
-from typing import List, Tuple
 
 import cv2
 import mediapipe as mp
 from mediapipe.framework.formats import landmark_pb2
 from pythonosc import udp_client
 from pythonosc.osc_message_builder import OscMessageBuilder
+
+from utils import add_default_args
 
 POSE_ADDRESS = "/mediapipe/pose"
 
@@ -31,18 +32,7 @@ def send_pose(client: udp_client,
 def main():
     # read arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument("--device", type=int, default=0,
-                        help="The id of the capture device (camera)")
-
-    parser.add_argument("-mdc", "--min-detection-confidence", type=float, default=0.5,
-                        help="Minimum confidence value ([0.0, 1.0]) for the detection to be considered successful.")
-    parser.add_argument("-mtc", "--min-tracking-confidence", type=float, default=0.5,
-                        help=" Minimum confidence value ([0.0, 1.0]) to be considered tracked successfully.")
-
-    parser.add_argument("--ip", default="127.0.0.1",
-                        help="The ip of the OSC server")
-    parser.add_argument("--port", type=int, default=7500,
-                        help="The port the OSC server is listening on")
+    add_default_args(parser)
     args = parser.parse_args()
 
     # create osc client

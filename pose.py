@@ -33,6 +33,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--device", type=int, default=0,
                         help="The id of the capture device (camera)")
+
+    parser.add_argument("-mdc", "--min-detection-confidence", type=float, default=0.5,
+                        help="Minimum confidence value ([0.0, 1.0]) for the detection to be considered successful.")
+    parser.add_argument("-mtc", "--min-tracking-confidence", type=float, default=0.5,
+                        help=" Minimum confidence value ([0.0, 1.0]) to be considered tracked successfully.")
+
     parser.add_argument("--ip", default="127.0.0.1",
                         help="The ip of the OSC server")
     parser.add_argument("--port", type=int, default=7500,
@@ -46,9 +52,8 @@ def main():
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
 
-    # todo: expose confidence parameters
     pose = mp_pose.Pose(
-        min_detection_confidence=0.5, min_tracking_confidence=0.5)
+        min_detection_confidence=args.min_detection_confidence, min_tracking_confidence=args.min_tracking_confidence)
     cap = cv2.VideoCapture(args.device)
     while cap.isOpened():
         success, image = cap.read()

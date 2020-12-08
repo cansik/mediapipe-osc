@@ -19,8 +19,10 @@ python pose.py --device 0
 Other parameters are documented in the following list or algorithm specific.
 
 - device - Device id for the VideoCapture (default `0`)
+- min-detection-confidence - Minimum confidence value ([0.0, 1.0]) for the detection to be considered successful. (default `0.5`)
+- min-tracking-confidence - Minimum confidence value ([0.0, 1.0]) to be considered tracked successfully. (default `0.5`)
 - ip - OSC ip address to send to (default `127.0.0.1`)
-- poet - OSC port to send to (default `7500`)
+- port - OSC port to send to (default `7500`)
 
 
 ### Pose Landmark Model (BlazePose Tracker)

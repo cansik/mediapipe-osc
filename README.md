@@ -64,6 +64,10 @@ The [hand detection model](https://google.github.io/mediapipe/solutions/hands.ht
 ### Face Mesh
 tbd
 
+### Examples
+
+Currently there are very basic receiver examples for processing. Check out the [examples](examples) folder.
+
 ### About
 Example code and documentation adapted from [google/mediapipe](https://google.github.io/mediapipe/solutions/)
 OSC sending and examples implemented by [cansik](https://github.com/cansik)

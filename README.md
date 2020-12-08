@@ -32,14 +32,34 @@ The landmark model currently included in MediaPipe Pose predicts the location of
 
 *[Reference: mediapipe/solutions/pose](https://google.github.io/mediapipe/solutions/pose#pose-landmark-model-blazepose-tracker)*
 
-The OSC message sent by the pose example contains 1 `int` and 25 x 4 `float` values. The first `int` value indicates how many psoes are sent (currently only `0` or `1`).
+#### Format
+
+- `count` - Indicates how many poses are detected (currently only `0` or `1`)
+- list of landmarks (`25` per pose) (if pose has been detected)
+    - `x` - X-Position of the landmark
+    - `y` - Y-Position of the landmark
+    - `z` - Z-Position of the landmark
+    - `visibility` - Visibility of the landmark
 
 ```
 /mediapipe/pose [count, x, y, z, visibility, x, y, z, visibility ...]
 ```
 
 ### Hand Detection
-tbd
+The [hand detection model](https://google.github.io/mediapipe/solutions/hands.html) is able to detect and track 21 3D landmarks.
+
+#### Format
+
+- `count` - Indicates how many hands are detected
+- list of landmarks (`21` per hand) (if hands has been detected)
+    - `x` - X-Position of the landmark
+    - `y` - Y-Position of the landmark
+    - `z` - Z-Position of the landmark
+    - `visibility` - Visibility of the landmark
+
+```
+/mediapipe/hands [count, x, y, z, visibility, x, y, z, visibility ...]
+```
 
 ### Face Mesh
 tbd

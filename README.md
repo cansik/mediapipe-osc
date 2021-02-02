@@ -13,12 +13,15 @@ To run an example use the basic python command to start up the script.
 
 ```bash
 # start pose detection with webcam 0
-python pose.py --device 0
+python pose.py --input 0
+
+# start pose detection with video
+python pose.py --input yoga.mp4
 ```
 
 Other parameters are documented in the following list or algorithm specific.
 
-- **device** - Device id for the VideoCapture (default `0`)
+- **input** - The video input path or video camera id (default `0`)
 - **min-detection-confidence** - Minimum confidence value ([0.0, 1.0]) for the detection to be considered successful. (default `0.5`)
 - **min-tracking-confidence** - Minimum confidence value ([0.0, 1.0]) to be considered tracked successfully. (default `0.5`)
 - **ip** - OSC ip address to send to (default `127.0.0.1`)

@@ -1,9 +1,18 @@
 from argparse import ArgumentParser
 
 
+def get_video_input(input_value):
+    if input_value.isnumeric():
+        print("using camera %s as input device..." % input_value)
+        return int(input_value)
+
+    print("using video '%s' as input..." % input_value)
+    return input_value
+
+
 def add_default_args(parser: ArgumentParser):
-    parser.add_argument("--device", type=int, default=0,
-                        help="The id of the capture device (camera)")
+    parser.add_argument("--input", type=str, default="0",
+                        help="The video input path or video camera id (device id).")
 
     parser.add_argument("-mdc", "--min-detection-confidence", type=float, default=0.5,
                         help="Minimum confidence value ([0.0, 1.0]) for the detection to be considered successful.")

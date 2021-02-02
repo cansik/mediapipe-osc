@@ -6,7 +6,7 @@ from mediapipe.framework.formats import landmark_pb2
 from pythonosc import udp_client
 from pythonosc.osc_message_builder import OscMessageBuilder
 
-from utils import add_default_args
+from utils import add_default_args, get_video_input
 
 OSC_ADDRESS = "/mediapipe/hands"
 
@@ -44,7 +44,7 @@ def main():
 
     hands = mp_hands.Hands(
         min_detection_confidence=0.7, min_tracking_confidence=0.5)
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(get_video_input(args.input))
     while cap.isOpened():
         success, image = cap.read()
         if not success:

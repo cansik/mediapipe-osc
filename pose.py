@@ -44,7 +44,10 @@ def main():
 
     pose = mp_pose.Pose(
         min_detection_confidence=args.min_detection_confidence, min_tracking_confidence=args.min_tracking_confidence)
-    cap = cv2.VideoCapture(args.device)
+    if args.device is None:
+        cap = cv2.VideoCapture(0)
+    else:
+        cap = cv2.VideoCapture(args.device)
     while cap.isOpened():
         success, image = cap.read()
         if not success:

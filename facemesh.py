@@ -7,7 +7,10 @@ mp_face_mesh = mp.solutions.face_mesh
 face_mesh = mp_face_mesh.FaceMesh(
     min_detection_confidence=0.5, min_tracking_confidence=0.5, max_num_faces=1)
 drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
-cap = cv2.VideoCapture(0)
+    if args.device is None:
+        cap = cv2.VideoCapture(0)
+    else:
+        cap = cv2.VideoCapture(args.device)
 while cap.isOpened():
     success, image = cap.read()
     if not success:

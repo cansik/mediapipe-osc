@@ -44,7 +44,10 @@ def main():
 
     hands = mp_hands.Hands(
         min_detection_confidence=0.7, min_tracking_confidence=0.5)
-    cap = cv2.VideoCapture(0)
+    if args.device is None:
+        cap = cv2.VideoCapture(0)
+    else:
+        cap = cv2.VideoCapture(args.device)
     while cap.isOpened():
         success, image = cap.read()
         if not success:

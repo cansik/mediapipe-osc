@@ -3,7 +3,6 @@ import argparse
 import cv2
 import mediapipe as mp
 from mediapipe.framework.formats import landmark_pb2
-from mediapipe.python.solutions.pose import PoseLandmark
 from pythonosc import udp_client
 from pythonosc.osc_message_builder import OscMessageBuilder
 
@@ -34,7 +33,10 @@ def main():
     # read arguments
     parser = argparse.ArgumentParser()
     add_default_args(parser)
-    parser.add_argument("--upper-body-only", default=False, type=bool, help="If true, only upper body is detected.")
+    parser.add_argument("--model-complexity", default=1, type=int,
+                        help="Set model complexity (0=Light, 1=Full, 2=Heavy).")
+    parser.add_argument("--no-smooth-landmarks", action="store_false", help="Disable landmark smoothing.")
+    parser.add_argument("--static-image-mode", action="store_true", help="Enables static image mode.")
     args = parser.parse_args()
 
     # create osc client
@@ -45,15 +47,15 @@ def main():
     mp_pose = mp.solutions.pose
 
     pose = mp_pose.Pose(
-        upper_body_only=args.upper_body_only,
+        smooth_landmarks=args.no_smooth_landmarks,
+        static_image_mode=args.static_image_mode,
+        model_complexity=args.model_complexity,
         min_detection_confidence=args.min_detection_confidence,
         min_tracking_confidence=args.min_tracking_confidence)
     cap = cv2.VideoCapture(get_video_input(args.input))
 
     # fix bug which occurs because draw landmarks is not adapted to upper pose
     connections = mp_pose.POSE_CONNECTIONS
-    if args.upper_body_only:
-        connections = UPPER_POSE_CONNECTIONS
 
     while cap.isOpened():
         success, image = cap.read()
@@ -82,35 +84,6 @@ def main():
     pose.close()
     cap.release()
 
-
-UPPER_POSE_CONNECTIONS = frozenset([
-    (PoseLandmark.NOSE, PoseLandmark.RIGHT_EYE_INNER),
-    (PoseLandmark.RIGHT_EYE_INNER, PoseLandmark.RIGHT_EYE),
-    (PoseLandmark.RIGHT_EYE, PoseLandmark.RIGHT_EYE_OUTER),
-    (PoseLandmark.RIGHT_EYE_OUTER, PoseLandmark.RIGHT_EAR),
-    (PoseLandmark.NOSE, PoseLandmark.LEFT_EYE_INNER),
-    (PoseLandmark.LEFT_EYE_INNER, PoseLandmark.LEFT_EYE),
-    (PoseLandmark.LEFT_EYE, PoseLandmark.LEFT_EYE_OUTER),
-    (PoseLandmark.LEFT_EYE_OUTER, PoseLandmark.LEFT_EAR),
-    (PoseLandmark.MOUTH_RIGHT, PoseLandmark.MOUTH_LEFT),
-    (PoseLandmark.RIGHT_SHOULDER, PoseLandmark.LEFT_SHOULDER),
-    (PoseLandmark.RIGHT_SHOULDER, PoseLandmark.RIGHT_ELBOW),
-    (PoseLandmark.RIGHT_ELBOW, PoseLandmark.RIGHT_WRIST),
-    (PoseLandmark.RIGHT_WRIST, PoseLandmark.RIGHT_PINKY),
-    (PoseLandmark.RIGHT_WRIST, PoseLandmark.RIGHT_INDEX),
-    (PoseLandmark.RIGHT_WRIST, PoseLandmark.RIGHT_THUMB),
-    (PoseLandmark.RIGHT_PINKY, PoseLandmark.RIGHT_INDEX),
-    (PoseLandmark.LEFT_SHOULDER, PoseLandmark.LEFT_ELBOW),
-    (PoseLandmark.LEFT_ELBOW, PoseLandmark.LEFT_WRIST),
-    (PoseLandmark.LEFT_WRIST, PoseLandmark.LEFT_PINKY),
-    (PoseLandmark.LEFT_WRIST, PoseLandmark.LEFT_INDEX),
-    (PoseLandmark.LEFT_WRIST, PoseLandmark.LEFT_THUMB),
-    (PoseLandmark.LEFT_PINKY, PoseLandmark.LEFT_INDEX),
-    (PoseLandmark.RIGHT_SHOULDER, PoseLandmark.RIGHT_HIP),
-    (PoseLandmark.LEFT_SHOULDER, PoseLandmark.LEFT_HIP),
-    (PoseLandmark.RIGHT_HIP, PoseLandmark.LEFT_HIP),
-    (PoseLandmark.RIGHT_HIP, PoseLandmark.LEFT_HIP)
-])
 
 if __name__ == "__main__":
     main()

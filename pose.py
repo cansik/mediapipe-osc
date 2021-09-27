@@ -2,6 +2,7 @@ import argparse
 
 import cv2
 import mediapipe as mp
+import numpy as np
 from mediapipe.framework.formats import landmark_pb2
 from pythonosc import udp_client
 from pythonosc.osc_message_builder import OscMessageBuilder
@@ -9,6 +10,19 @@ from pythonosc.osc_message_builder import OscMessageBuilder
 from utils import add_default_args, get_video_input
 
 OSC_ADDRESS = "/mediapipe/pose"
+
+
+def draw_pose_rect(image, rect, color=(255, 0, 255), thickness=2):
+    image_width = image.shape[1]
+    image_height = image.shape[0]
+
+    world_rect = [(rect.x_center * image_width, rect.y_center * image_height),
+                  (rect.width * image_width, rect.height * image_height),
+                  rect.rotation]
+
+    box = cv2.boxPoints(world_rect)
+    box = np.int0(box)
+    cv2.drawContours(image, [box], 0, color, thickness)
 
 
 def send_pose(client: udp_client,
@@ -72,6 +86,9 @@ def main():
 
         # send the pose over osc
         send_pose(client, results.pose_landmarks)
+
+        if results.pose_rect_from_landmarks:
+            draw_pose_rect(image, results.pose_rect_from_landmarks)
 
         # Draw the pose annotation on the image.
         image.flags.writeable = True

@@ -83,7 +83,7 @@ All values are normalized to the image width and height.
 - list of one bounding box per face (if faces has been detected)
     - `xmin` - X-Position of the top-left bounding box anchor
     - `ymin` - Y-Position of the top-left bounding box anchor
-    - `width` - With of the bounding box
+    - `width` - Width of the bounding box
     - `height` - Height of the bounding box
     - `score` - Confidence score of the bounding box
 

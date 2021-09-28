@@ -73,7 +73,7 @@ The [hand detection model](https://google.github.io/mediapipe/solutions/hands.ht
 /mediapipe/hands [count, x, y, z, visibility, x, y, z, visibility ...]
 ```
 
-#### Face Detection
+### Face Detection
 The [face detection model](https://google.github.io/mediapipe/solutions/face_detection.html) is able to detect multiple faces and 5 keypoints. At the moment only the bounding box is sent over OSC.
 
 #### Format
@@ -96,7 +96,7 @@ tbd
 
 ### Examples
 
-Currently there are very basic receiver examples for processing. Check out the [examples](examples) folder.
+Currently, there are very basic receiver examples for processing. Check out the [examples](examples) folder.
 
 ### About
 * Example code and documentation adapted from [google/mediapipe](https://google.github.io/mediapipe/solutions/)

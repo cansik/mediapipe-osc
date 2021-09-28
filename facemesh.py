@@ -29,7 +29,7 @@ while cap.isOpened():
             mp_drawing.draw_landmarks(
                 image=image,
                 landmark_list=face_landmarks,
-                connections=mp_face_mesh.FACE_CONNECTIONS,
+                connections=mp_face_mesh.FACEMESH_CONTOURS,
                 landmark_drawing_spec=drawing_spec,
                 connection_drawing_spec=drawing_spec)
     cv2.imshow('MediaPipe FaceMesh', image)

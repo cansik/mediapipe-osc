@@ -73,6 +73,24 @@ The [hand detection model](https://google.github.io/mediapipe/solutions/hands.ht
 /mediapipe/hands [count, x, y, z, visibility, x, y, z, visibility ...]
 ```
 
+#### Face Detection
+The [face detection model](https://google.github.io/mediapipe/solutions/face_detection.html) is able to detect multiple faces and 5 keypoints. At the moment only the bounding box is sent over OSC.
+
+#### Format
+All values are normalized to the image width and height.
+
+- `count` - Indicates how many faces are detected
+- list of one bounding box per face (if faces has been detected)
+    - `xmin` - X-Position of the top-left bounding box anchor
+    - `ymin` - Y-Position of the top-left bounding box anchor
+    - `width` - With of the bounding box
+    - `height` - Height of the bounding box
+    - `score` - Confidence score of the bounding box
+
+```
+/mediapipe/faces [count, xmin, ymin, width, height, score, xmin, ymin, width, height, score ...]
+```
+
 ### Face Mesh
 tbd
 

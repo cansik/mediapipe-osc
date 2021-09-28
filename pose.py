@@ -87,7 +87,7 @@ def main():
         # send the pose over osc
         send_pose(client, results.pose_landmarks)
 
-        if results.pose_rect_from_landmarks:
+        if hasattr(results, "pose_rect_from_landmarks"):
             draw_pose_rect(image, results.pose_rect_from_landmarks)
 
         # Draw the pose annotation on the image.
